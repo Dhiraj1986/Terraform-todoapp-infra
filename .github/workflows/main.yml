@@ -1,0 +1,11 @@
+name: mera pahla workflok
+
+on:
+  push:
+    branches:
+      - main
+      - 'releases/**'
+jobs:
+  terraforminit:
+    name:terraform init
+    runs-on:dhondhu-maharaj
