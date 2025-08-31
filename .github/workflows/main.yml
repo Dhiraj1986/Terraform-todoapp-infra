@@ -1,11 +1,7 @@
-name: mera pahla workflok
+name: "Infra pipeline"
 
-on:
-  push:
-    branches:
-      - main
-      - 'releases/**'
+on: workflow_dispatch  # for manual run
+
 jobs:
-  terraforminit:
-    name:terraform init
-    runs-on:dhondhu-maharaj
+  terraform-job:
+    runs-on: self-hosted
