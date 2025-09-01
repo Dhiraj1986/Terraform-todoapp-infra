@@ -5,7 +5,7 @@ on: workflow_dispatch  # for manual run
 jobs:
   terraform-job:
     name:terraform pahla job
-    runs-on: self-hosted
+    runs-on:self-hosted
     steps:
      - name: Checkout
        uses: actions/checkout@v5.0.0
