@@ -2,9 +2,9 @@ name: "Infra pipeline"
 
 on: workflow_dispatch  # for manual run
 
-# permissions:
-#   id-token: write
-#   contents: read
+permissions:
+  id-token: write
+  contents: read
   
 jobs:
   terraform-job:
