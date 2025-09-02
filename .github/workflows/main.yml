@@ -25,31 +25,31 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
-          client-id: 
-          tenant-id: 
-          subscription-id: 
+          client-id: 63eeb207-11d4-404c-b9b0-b739c16d30f0
+          tenant-id: defb5fbe-74e0-453c-9d33-594936bf34c5
+          subscription-id: 81cc1915-8d88-419e-8fa3-0178811761bd
 
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        working-directory: environment/dev
-        continue-on-error: true
+      # - name: Terraform fmt
+      #   id: fmt
+      #   run: terraform fmt -check
+      #   working-directory: environment/dev
+      #   continue-on-error: true
         
-      - name: Terraform Init
-        id: init
-        run: terraform init -input=false
-        working-directory: environment/dev
+      # - name: Terraform Init
+      #   id: init
+      #   run: terraform init -input=false
+      #   working-directory: environment/dev
         
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-        working-directory: environment/dev
+      # - name: Terraform Validate
+      #   id: validate
+      #   run: terraform validate -no-color
+      #   working-directory: environment/dev
       
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color -input=false
-        continue-on-error: true
-        working-directory: environment/dev
+      # - name: Terraform Plan
+      #   id: plan
+      #   run: terraform plan -no-color -input=false
+      #   continue-on-error: true
+      #   working-directory: environment/dev
                  
           
       
