@@ -8,7 +8,7 @@ permissions:
   
 jobs:
   terraform-job:
-    # name: terraform pahla job
+    name: terraform pahla job
     runs-on: self-hosted
     steps:
       - name: Checkout
