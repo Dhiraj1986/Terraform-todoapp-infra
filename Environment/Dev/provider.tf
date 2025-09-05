@@ -5,7 +5,14 @@ terraform {
       version = "4.42.0"
     }
   }
+ backend "azurerm" {
+    resource_group_name   = "dhiraj-rg"
+    storage_account_name  = "dhirajstorage11"
+    container_name        = "dhiraj-blob-container"
+    key                   = "dev.tfstate"
+  }
 }
+
 
 provider "azurerm" {
   features {}
