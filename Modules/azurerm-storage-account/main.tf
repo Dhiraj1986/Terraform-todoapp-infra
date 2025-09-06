@@ -7,6 +7,6 @@ resource "azurerm_storage_account" "storage-acc" {
   account_replication_type = "GRS"
 
   tags = var.sa-tags
-   
+
 
 }
