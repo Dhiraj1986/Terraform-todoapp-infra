@@ -8,19 +8,19 @@ permissions:
   
 jobs:
   terraform-job:
-    name: terraform pahla job
+    name: "terraform pahla job"
     runs-on: self-hosted
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v4.0.0
 
       - name: Install Terraform
-        uses: little-core-labs/install-terraform@v2.0.0
+        uses: hashicorp/setup-terraform@v2.0.0
         with:
-          version: 4.42.0 
+          version: 1.9.8
 
       - name: Azure Login
-        uses: Azure/login@v2.3.0
+        uses: Azure/login@v2
         with:
           client-id: 63eeb207-11d4-404c-b9b0-b739c16d30f0
           tenant-id: defb5fbe-74e0-453c-9d33-594936bf34c5
