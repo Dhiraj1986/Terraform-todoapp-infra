@@ -83,7 +83,7 @@ module "aks" {
 
 module "managed-identity" {
   depends_on            = [module.rg]
-  source                = "../../modules/azurerm-managed-identity"
+  source                = "../../Modules/azurerm-managed-identity"
   resource_group_name   = "rg-dev-todoapp"
   location              = "centralindia"
   managed-identity-name = "managed-id-dev-todoapp"
