@@ -52,7 +52,11 @@ jobs:
         run: terraform plan -out=tfplan
         working-directory: Environment/Dev
         
-      
+  manual-approval:      
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manual Workflow Approval  
+        uses: trstringer/manual-approval@v1.9.0
 
       
 
