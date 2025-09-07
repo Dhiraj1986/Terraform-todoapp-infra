@@ -14,10 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.0.0
 
-      # - name: Install Terraform
-      #   uses: hashicorp/setup-terraform@v3
-      #   with:
-      #     version: 1.1.7
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
 
       
       # - name: Azure Login with OIDC
