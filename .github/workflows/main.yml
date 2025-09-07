@@ -8,7 +8,7 @@ permissions:
   
 jobs:  # 1st job
   terraform-job:
-    name: "terraform pahla job"
+    # name: "terraform pahla job"
     # environment: Dev  # for manual validation
     runs-on: ubuntu-latest
     steps:
