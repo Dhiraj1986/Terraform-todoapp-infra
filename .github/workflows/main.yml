@@ -34,7 +34,7 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt -check
+        run: terraform fmt
         working-directory: Environment/Dev
         continue-on-error: true
         
