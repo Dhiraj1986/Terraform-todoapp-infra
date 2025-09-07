@@ -37,16 +37,16 @@ jobs:
         run: terraform init -input=false
         working-directory: Environment/Dev/
         
-      # # - name: Terraform Validate
-      # #   id: validate
-      # #   run: terraform validate -no-color
-      #   working-directory: Environment/Dev/
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: Environment/Dev/
       
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -no-color -input=false
-      #   continue-on-error: true
-      #   working-directory: environment/dev
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+        working-directory: environment/dev
 
 
 
