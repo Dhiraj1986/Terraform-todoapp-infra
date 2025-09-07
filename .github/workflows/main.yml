@@ -9,6 +9,7 @@ permissions:
 jobs:
   terraform-job:
     name: "terraform pahla job"
+    environment: Dev  # for manual validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,11 +53,12 @@ jobs:
         run: terraform plan -out=tfplan
         working-directory: Environment/Dev
         
-  manual-approval:      
-    runs-on: ubuntu-latest
-    steps:
-      - name: Manual Workflow Approval  
-        uses: trstringer/manual-approval@v1.9.0
+        # yah sahi tarika nahi hai manual validation ka,iske badle settings--Environments--Dev--required approvals--Dhiraj1986--ok
+  # manual-approval:      
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Manual Workflow Approval  
+  #       uses: trstringer/manual-approval@v1.9.0
 
       
 
