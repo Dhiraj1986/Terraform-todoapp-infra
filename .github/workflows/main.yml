@@ -37,28 +37,28 @@ jobs:
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
-        working-directory: ./Environment/Dev
+        working-directory: Environment/Dev
         continue-on-error: true
         
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        working-directory: ./Environment/Dev
+        working-directory: Environment/Dev
         
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-        working-directory: ./Environment/Dev
+        working-directory: Environment/Dev
       
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false -out=tfplan
         continue-on-error: true
-        working-directory: ./Environment/dev
+        working-directory: Environment/dev
         
       - name: Show Plan Output
         run: terraform show -no-color tfplan
-        working-directory: ./Environment/Dev
+        working-directory: Environment/Dev
 
       
 
