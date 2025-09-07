@@ -49,14 +49,10 @@ jobs:
         working-directory: ./Environment/Dev
       
       - name: Terraform Plan
-        id: plan
-        run: terraform plan
-        continue-on-error: true
-        working-directory: ./Environment/dev
+        run: terraform plan -out=tfplan
+        working-directory: Environment/Dev
         
-      - name: Show Plan Output
-        run: terraform show -no-color tfplan
-        working-directory: ./Environment/Dev
+      
 
       
 
