@@ -115,7 +115,7 @@ module "dev-pip" {
   depends_on          = [module.rg]
   source              = "../../Modules/azurerm-public-ip"
   pip-name           = "pip-dev-todoapp"
-  resource_group_name = "pip-dev-todoapp"
+  resource_group_name = "rg-dev-todoapp"
   location            = "centralindia"
   sku = "Basic"
   tags = {
