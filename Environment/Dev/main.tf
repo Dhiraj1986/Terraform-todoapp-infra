@@ -1,5 +1,5 @@
 module "rg" {
-  source      = "../../modules/azurerm-resource-group"
+  source      = "../../Modules/azurerm-resource-group"
   rg-name     = "rg-dev-todoapp"
   rg-location = "centralindia"
   rg-tags = {
@@ -11,7 +11,7 @@ module "rg" {
 
 module "storage" {
   depends_on  = [module.rg]
-  source      = "../../modules/azurerm-storage-account"
+  source      = "../../Modules/azurerm-storage-account"
   sa-name     = "storagedevtodoapp1"
   rg-name     = "rg-dev-todoapp"
   sa-location = "centralindia"
@@ -24,7 +24,7 @@ module "storage" {
 
 module "acr" {
   depends_on          = [module.rg]
-  source              = "../../modules/azurerm-container-registry"
+  source              = "../../Modules/azurerm-container-registry"
   acr-name            = "acrdevtodoapp1"
   resource_group_name = "rg-dev-todoapp"
   location            = "centralindia"
@@ -37,7 +37,7 @@ module "acr" {
 
 module "sql" {
   depends_on          = [module.rg]
-  source              = "../../modules/azurerm-sql-server"
+  source              = "../../Modules/azurerm-sql-server"
   sql-server-name     = "sql-dev-todoapp"
   resource_group_name = "rg-dev-todoapp"
   location            = "centralindia"
@@ -52,7 +52,7 @@ module "sql" {
 
 module "sql-db" {
   depends_on    = [module.sql]
-  source        = "../../modules/azurerm-sql-database"
+  source        = "../../Modules/azurerm-sql-database"
   mssql-db-name = "mssql-db-dev-todoapp"
   server_id     = module.sql.server_id
   collation     = "SQL_Latin1_General_CP1_CI_AS"
@@ -67,7 +67,7 @@ module "sql-db" {
 
 module "aks" {
   depends_on          = [module.rg]
-  source              = "../../modules/azurerm-kubernetes-cluster"
+  source              = "../../Modules/azurerm-kubernetes-cluster"
   aks-name            = "aks-dev-todoapp"
   resource_group_name = "rg-dev-todoapp"
   location            = "centralindia"
@@ -83,7 +83,7 @@ module "aks" {
 
 module "managed-identity" {
   depends_on            = [module.rg]
-  source                = "../../modules/azurerm-managed-identity"
+  source                = "../../Modules/azurerm-managed-identity"
   resource_group_name   = "rg-dev-todoapp"
   location              = "centralindia"
   managed-identity-name = "managed-id-dev-todoapp"
@@ -97,7 +97,7 @@ module "managed-identity" {
 
 module "key-vault" {
   depends_on          = [module.rg]
-  source              = "../../modules/azurerm-keyvault"
+  source              = "../../Modules/azurerm-keyvault"
   kv-name             = "keyvault-dev-todoapp"
   resource_group_name = "rg-dev-todoapp"
   location            = "centralindia"
@@ -108,13 +108,11 @@ module "key-vault" {
     "owner"       = "todoapp team"
     "environment" = "dev"
   }
-}
-
-
+    
 module "dev-pip" {
   depends_on          = [module.rg]
   source              = "../../Modules/azurerm-public-ip"
-  pip-name            = "pip-dev-todoapp"
+  pip-name           = "pip-dev-todoapp"
   resource_group_name = "rg-dev-todoapp"
   location            = "centralindia"
   sku                 = "Basic"
@@ -124,3 +122,4 @@ module "dev-pip" {
     "environment" = "dev"
   }
 }
+

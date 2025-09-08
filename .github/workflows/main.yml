@@ -1,52 +1,103 @@
-name: "Infra pipeline"
+name: dev terraform workflow
 
-on: workflow_dispatch  # for manual run
+on:
+  pull_request:  # this will work when PR raise from feature to main branch
+    branches:
+      - main
+  push:
+    branches:    # this will work when come push to main from feature
+      - main
 
 permissions:
   id-token: write
   contents: read
   
-jobs:
+jobs:  # 1st job
   terraform-job:
-    name: terraform pahla job
-    runs-on: self-hosted
+    name: "terraform pahla job"
+    # environment: Dev  # for manual validation
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v4.0.0
 
-      - name: Install Terraform
-        uses: little-core-labs/install-terraform@v2.0.0
-        with:
-          version: 4.42.0 
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
 
-      - name: Azure Login
-        uses: Azure/login@v2.3.0
+      
+      - name: Azure Login with OIDC
+        uses: Azure/login@v2
         with:
-          client-id: 63eeb207-11d4-404c-b9b0-b739c16d30f0
-          tenant-id: defb5fbe-74e0-453c-9d33-594936bf34c5
-          subscription-id: 81cc1915-8d88-419e-8fa3-0178811761bd
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # - name: Azure Login
+      #   uses: Azure/login@v2
+      #   with:
+      #     client-id: da20dc07-bace-4293-ab7b-ff449a8911aa
+      #     tenant-id: defb5fbe-74e0-453c-9d33-594936bf34c5
+      #     subscription-id: 81cc1915-8d88-419e-8fa3-0178811761bd
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt -check
-        working-directory: Environment/Dev/
+        run: terraform fmt
+        working-directory: ./Environment/Dev
         continue-on-error: true
         
       - name: Terraform Init
         id: init
-        run: terraform init -input=false
-        working-directory: Environment/Dev/
+        run: terraform init
+        working-directory: ./Environment/Dev
         
-      # # - name: Terraform Validate
-      # #   id: validate
-      # #   run: terraform validate -no-color
-      #   working-directory: Environment/Dev/
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+        working-directory: ./Environment/Dev
       
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -no-color -input=false
-      #   continue-on-error: true
-      #   working-directory: environment/dev
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: Environment/Dev
+        
+        # yah sahi tarika nahi hai manual validation ka,iske badle settings--Environments--Dev--required approvals--Dhiraj1986--ok
+  # manual-approval:      
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Manual Workflow Approval  
+  #       uses: trstringer/manual-approval@v1.9.0
+
+  terraform-apply:
+    name: "terraform apply job"
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: terraform-job
+    environment: Dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.0.0
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+      
+      
+      - name: Azure Login with OIDC
+        uses: Azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ./Environment/Dev
+
+      # - name: Terraform apply
+      #   id: apply
+      #   run: terraform apply --auto-approve
+      #   working-directory: ./Environment/Dev
+
+      
 
 
 
