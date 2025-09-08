@@ -108,4 +108,19 @@ module "key-vault" {
     "owner"       = "todoapp team"
     "environment" = "dev"
   }
+
 }
+module "dev-pip" {
+  depends_on          = [module.rg]
+  source              = "../../Modules/azurerm-public-ip"
+  pip-name            = "pip-dev-todoapp"
+  resource_group_name = "rg-dev-todoapp"
+  location            = "centralindia"
+  sku                 = "Basic"
+  tags = {
+    "managed by"  = "terraform"
+    "owner"       = "todoapp team"
+    "environment" = "dev"
+  }
+}
+
