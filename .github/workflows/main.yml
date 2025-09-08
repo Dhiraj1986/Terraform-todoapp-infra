@@ -1,6 +1,12 @@
-name: "todo-infra-pipeline"
+name: dev terraform workflow
 
-on: workflow_dispatch  # for manual run
+on:
+  pull_request:  # this will work when PR raise from feature to main branch
+    branches:
+      - main
+  push:
+    branches:    # this will work when come push to main from feature
+      - main
 
 permissions:
   id-token: write
@@ -8,7 +14,7 @@ permissions:
   
 jobs:  # 1st job
   terraform-job:
-    # name: "terraform pahla job"
+    name: "terraform pahla job"
     # environment: Dev  # for manual validation
     runs-on: ubuntu-latest
     steps:
@@ -63,6 +69,7 @@ jobs:  # 1st job
   terraform-apply:
     name: "terraform apply job"
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     needs: terraform-job
     environment: Dev
     steps:
@@ -79,6 +86,7 @@ jobs:  # 1st job
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          
       - name: Terraform Init
         id: init
         run: terraform init
