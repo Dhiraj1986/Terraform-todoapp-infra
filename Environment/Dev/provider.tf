@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "azurerm" {
-    
+  
     resource_group_name  = "dhiraj-rg"
     storage_account_name = "dhirajstorage11"
     container_name       = "dhiraj-blob-container"
