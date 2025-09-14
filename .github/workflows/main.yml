@@ -69,7 +69,7 @@ jobs:  # 1st job
   terraform-apply:
     name: "terraform apply job"
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'  # this show apply will be run through main branch
     needs: terraform-job
     environment: Dev
     steps:
