@@ -1,12 +1,13 @@
 name: dev terraform workflow
 
 on:
-  pull_request:  # this will work when PR raise from feature to main branch
-    branches:
-      - main
+  # pull_request:  # this will work when PR raise from feature to main branch
+  #   branches:
+  #     - main
   push:
-    branches:    # this will work when come push to main from feature
+    branches:    # this will work when come push to main from feature.
       - main
+      - feature/*
 
 permissions:
   id-token: write
