@@ -18,6 +18,7 @@ jobs:  # 1st job
     name: "terraform pahla job"
     # environment: Dev  # for manual validation
     runs-on: ubuntu-latest
+    Environment: Dev
     steps:
       - name: Checkout
         uses: actions/checkout@v4.0.0
