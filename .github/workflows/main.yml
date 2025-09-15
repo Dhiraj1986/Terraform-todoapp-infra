@@ -7,7 +7,7 @@ on:
   push:
     branches:    # this will work when come push to main from feature.
       - main
-      - feature/*
+      - 'feature/*'  # global feature 
 
 permissions:
   id-token: write
