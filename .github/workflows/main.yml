@@ -1,13 +1,14 @@
 name: dev terraform workflow
 
 on:
+  workflow_dispatch # for manual trigger workflow
   # pull_request:  # this will work when PR raise from feature to main branch
   #   branches:
   #     - main
   push:
-    branches:    # this will work when come push to main from feature.
-      - main
-      - 'feature*'  # global feature...
+    # branches:    # this will work when come push to main from feature.
+    #   - main
+    #   - 'feature*'  # global feature...
 
 permissions:
   id-token: write
