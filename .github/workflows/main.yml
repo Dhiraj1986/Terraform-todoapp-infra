@@ -1,7 +1,7 @@
 name: dev terraform workflow
 
 on:
-  workflow_dispatch # for manual trigger workflow
+  # workflow_dispatch # for manual trigger workflow
   # pull_request:  # this will work when PR raise from feature to main branch
   #   branches:
   #     - main
@@ -10,18 +10,18 @@ on:
     #   - main
     #   - 'feature*'  # global feature...
 
-permissions:
+permissions:  # this required to access client,tanent,subscription in workflow
   id-token: write
   contents: read
   
 jobs:  # 1st job
-  terraform-job:
-    name: "terraform pahla job"
+  terraform-job:  # this is job id
+    name: "terraform pahla job"  # this is job name
     # environment: Dev  # for manual validation
     runs-on: ubuntu-latest
-    environment: Dev
+    # environment: Dev
     steps:
-      - name: Checkout
+      - name: Checkout   # 
         uses: actions/checkout@v4.0.0
 
       - name: HashiCorp - Setup Terraform
